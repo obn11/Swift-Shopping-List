@@ -1,7 +1,7 @@
 import Foundation
 
 struct FoodToGet: Codable, Identifiable {
-    let id: UUID
+    var id: UUID? = UUID()
     let foodItem: FoodItem
     var quantity: Int
 }
