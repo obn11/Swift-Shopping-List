@@ -1,4 +1,6 @@
-struct cli {
+import Foundation
+
+class cli {
   static func Input() -> [String] {
     print("Enter your shopping list (one item per line, enter an empty line to finish):")
     var inputList: [String] = []
