@@ -1,8 +1,11 @@
 import Foundation
 
+let db = Supermarket() 
+db.seed()
+//db.log()
+
 // TODO temp, make inputType enum
 func Run (inputType: String = "CMD") {
-  print("hello")
   let manager = ShoppingListManager()
   if (inputType == "CMD") {
     manager.input = cli.Input()

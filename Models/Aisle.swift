@@ -1,11 +1,11 @@
 class Aisle: Codable {
     let number: Int
     let name: String
-    let sections: [Section]
+    var sections: [Section]
 
-    init(number: Int, name: String, sections: [Section]) {
+    init(number: Int, name: String) {
         self.number = number
         self.name = name
-        self.sections = sections
+        self.sections = []
     }
 }
