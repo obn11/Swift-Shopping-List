@@ -24,9 +24,9 @@ class Trip: Codable, Identifiable {
     func log() {
         for aisle in self.aisles {
             print("Aisle \(aisle.number): \(aisle.name)")
-            for section in aisle.sections {
-                print("  > \(section.name)")
-                for food in section.foodItems {
+            for category in aisle.categories {
+                print("  > \(category.name)")
+                for food in category.foodItems {
                     print("    [] \(food.name)")
                 }
             }
@@ -36,11 +36,10 @@ class Trip: Codable, Identifiable {
         LogUnsortedFood()
     }
 
-
     private func LogUnsortedFood() {
-    print("Unsorted")
+        print("Unsorted")
         for food in self.unsorted {
-            print("- " + food.name + " x" + String(food.quantity))
+            print("[] " + food.name + " x" + String(food.quantity))
         }
     }
 }

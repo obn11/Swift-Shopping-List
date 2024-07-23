@@ -7,7 +7,7 @@ func Run () {
   let manager = ShoppingListManager(supermarketDictionary: db.supermarket)
   manager.input = GetInput(inputType: "CMD")
   manager.ProcessInput()
-  manager.MapFoodToSection()
+  manager.MapFoodToCategory()
   manager.currentTrip.log()
 }
 

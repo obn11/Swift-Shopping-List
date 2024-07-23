@@ -1,6 +1,6 @@
 import Foundation
 
-struct Section {
+struct Category {
     let name: String
     var foodItems: [FoodItem]
 
@@ -10,7 +10,7 @@ struct Section {
     }
 }
 
-class SectionView: Codable, Identifiable {
+class CategoryView: Codable, Identifiable {
     let id: UUID
     let name: String
     var foodItems: [FoodItemView]
@@ -27,9 +27,9 @@ class SectionView: Codable, Identifiable {
         self.foodItems = foodItems
     }
 
-    init(section: Section) {
+    init(category: Category) {
         self.id = UUID()
-        self.name = section.name
-        self.foodItems = section.foodItems.map(FoodItemView.init)
+        self.name = category.name
+        self.foodItems = category.foodItems.map(FoodItemView.init)
     }
 }

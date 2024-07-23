@@ -2,5 +2,5 @@
 | ----------- | ------ | ----------- |
 | [Trip]      | ={     | [FoodToGet] |
 | [FoodToGet] | ==     | [FoodItem]  |
-| [Section]   | ={     | [FoodItem]  |
-| [Isle]      | ={     | [Section]   |
+| [Category]  | ={     | [FoodItem]  |
+| [Isle]      | ={     | [Category]  |

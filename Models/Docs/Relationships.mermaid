@@ -12,7 +12,7 @@ classDiagram
         +Generality generality
     }
     
-    class Section {
+    class Category {
         +UUID id
         +String name
         +FoodItem[] foodItems
@@ -21,7 +21,7 @@ classDiagram
     class Aisle {
         +UUID id
         +String name
-        +Section[] sections
+        +Category[] categories
     }
     
     class FoodToGet {
@@ -45,8 +45,8 @@ classDiagram
     }
     
     FoodItem --> "1" Generality : has
-    Section --> "*" FoodItem : contains
-    Aisle --> "*" Section : contains
+    Categories --> "*" FoodItem : contains
+    Aisle --> "*" Category : contains
     FoodToGet --> "1" FoodItem : references
     Trip --> "*" FoodToGet : contains
     ShoppingListManager --> "*" Aisle : manages
