@@ -1,20 +1,27 @@
 import Foundation
 
-let db = Supermarket() 
-db.seed()
-//db.log()
+func Run () {
+  let db = db()
+  db.seed()
+  db.log()
+  let manager = ShoppingListManager(supermarketDictionary: db.supermarket)
+  manager.input = GetInput(inputType: "CMD")
+  manager.ProcessInput()
+  manager.MapFoodToSection()
+  manager.currentTrip.log()
+}
 
+Run()
+
+// Helpers 
 // TODO temp, make inputType enum
-func Run (inputType: String = "CMD") {
-  let manager = ShoppingListManager()
+func GetInput (inputType: String = "CMD") -> [String] {
   if (inputType == "CMD") {
-    manager.input = cli.Input()
+    return cli.Input()
   } else if (inputType == "FILE") {
     print("Enter the file path")
   } else {
     print("Enter the input")
   }
-  manager.ProcessInput()
+  return [""]
 }
-
-Run(inputType: "CMD")

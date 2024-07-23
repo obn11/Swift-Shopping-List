@@ -1,25 +1,25 @@
 import Foundation
 
 // This will be represented as a proper db eventually
-class Supermarket {
-    var aisles: [Aisle]
+class db {
+    var supermarket: Supermarket
 
     // Seed Data
     init() {
-        self.aisles = []
+        self.supermarket = Supermarket()
     }
 
     func seed() {
 
         // Ailes
-        self.aisles.append(Aisle(number: 1, name: "Fresh Produce & Deli"))
-        self.aisles.append(Aisle(number: 2, name: "Dairy & Refrigerated"))
-        self.aisles.append(Aisle(number: 3, name: "Frozen Foods"))
-        self.aisles.append(Aisle(number: 4, name: "Pantry Staples"))
-        self.aisles.append(Aisle(number: 5, name: "Snacks & Beverages"))
-        self.aisles.append(Aisle(number: 6, name: "Alcohol"))
-        self.aisles.append(Aisle(number: 7, name: "Household & Personal Care"))
-        self.aisles.append(Aisle(number: 8, name: "Miscellaneous"))
+        self.supermarket.aisles.append(Aisle(number: 1, name: "Fresh Produce & Deli"))
+        self.supermarket.aisles.append(Aisle(number: 2, name: "Dairy & Refrigerated"))
+        self.supermarket.aisles.append(Aisle(number: 3, name: "Frozen Foods"))
+        self.supermarket.aisles.append(Aisle(number: 4, name: "Pantry Staples"))
+        self.supermarket.aisles.append(Aisle(number: 5, name: "Snacks & Beverages"))
+        self.supermarket.aisles.append(Aisle(number: 6, name: "Alcohol"))
+        self.supermarket.aisles.append(Aisle(number: 7, name: "Household & Personal Care"))
+        self.supermarket.aisles.append(Aisle(number: 8, name: "Miscellaneous"))
 
         // Sections
         addSectionToAisle(aisleName: "Fresh Produce & Deli", sectionName: "Fruit & Vegetables")
@@ -169,7 +169,7 @@ class Supermarket {
         
     // Function to add a section to a specific aisle
     func addSectionToAisle(aisleName: String, sectionName: String) {
-        if let aisle = aisles.first(where: { $0.name == aisleName }) {
+        if let aisle = supermarket.aisles.first(where: { $0.name == aisleName }) {
             let section = Section(name: sectionName)
             aisle.sections.append(section)
             return
@@ -178,10 +178,10 @@ class Supermarket {
     }
 
     func addFoodToSection(sectionName: String, foodName: String) {
-        for aisle in aisles {
-            if let section = aisle.sections.first(where: { $0.name == sectionName }) {
+        for aisle in supermarket.aisles {
+            if let i = aisle.sections.firstIndex(where: { $0.name == sectionName }) {
                 let food = FoodItem(name: foodName)
-                section.foodItems.append(food)
+                aisle.sections[i].foodItems.append(food)
                 return
             }
         }
@@ -190,7 +190,7 @@ class Supermarket {
 
     // To print the result and verify
     func log() {
-        for aisle in self.aisles {
+        for aisle in self.supermarket.aisles {
             print("Aisle \(aisle.number): \(aisle.name)")
             for section in aisle.sections {
                 print("  - \(section.name)")
