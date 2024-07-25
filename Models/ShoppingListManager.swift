@@ -3,57 +3,53 @@ import Foundation
 class ShoppingListManager {
   var input: [String]
   var foodRequest: [FoodItemView]
-  var supermarketDictionary: Supermarket
+  var db: db
   var currentTrip: Trip
 
-  init (supermarketDictionary: Supermarket) {
+  init (with db: db) {
     self.input = []
     self.foodRequest = []
     self.currentTrip = Trip()
-    self.supermarketDictionary = supermarketDictionary
+    self.db = db
   }
 
+  // Porbable refactor
   // Pre processing to seporate food and quantity
   func ProcessInput() {
     for food in input {
-      // Doesn't work with foods starting with x TODO regex
       let temp: [String] = food.components(separatedBy: " x")
       let quanity = temp.count > 1 ? Int(temp[1]) : 1 
-      let foodItem = FoodItemView(name: temp[0], quantity: quanity)
+      let foodItem = FoodItemView(temp[0], quantity: quanity)
      foodRequest.append(foodItem)
     }
   }
 
   func MapFoodToCategory() {
     for food in foodRequest {
-      var foodFound = false;
-      
-      for aisle in supermarketDictionary.aisles {
-        for category in aisle.categories {
-          for foodItem in category.foodItems {
-            if food.name == foodItem.name {
-              ForceAddToTrip(aisle: aisle, category: category, foodItem: food)
-              foodFound = true
-            }
-          }
+      // TODO normalize etc 
+      if let foody = db.foodDictionary[Utils.normalize(food.name)]  {
+        if let category = db.categoryDictionary[foody.category] {
+          ForceAddToTrip(aisle: category.aisle, category: category, foodItem: food)
+          continue
         }
       }
-      if !foodFound {
-        currentTrip.unsorted.append(food)
-      }
+      let foody = FoodItemView(food.name, quantity: 1)
+      currentTrip.unsorted.append(foody)
     }
   }
 
   // Helpers
-  private func ForceAddToTrip(aisle: Aisle, category: Category, foodItem: FoodItemView) {
+  // TODO 
+  private func ForceAddToTrip(aisle: voAisle, category: voCategory, foodItem: FoodItemView) {
+    print("here")
     guard let aisleView = currentTrip.aisles.first(where: { $0.name == aisle.name }) else {
-      let categoryView = CategoryView(name: category.name, foodItems: [foodItem])
-      let aisleView = AisleView(number: aisle.number, name: aisle.name, categories: [categoryView])
+      let categoryView = CategoryView(category.name, with: [foodItem])
+      let aisleView = AisleView(aisle.number, aisle.name, with: [categoryView])
       currentTrip.aisles.append(aisleView)
       return
     }
-    guard let categoryView = aisleView.categories.first(where: { $0.name == category.name }) else {
-      let categoryView = CategoryView(name: category.name, foodItems: [foodItem])
+    guard let categoryView = aisleView.categories.first(where: { $0.name == category.name }) else     {
+      let categoryView = CategoryView(category.name, with: [foodItem])
       aisleView.categories.append(categoryView)
       return 
     }

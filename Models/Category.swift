@@ -1,13 +1,8 @@
 import Foundation
 
-struct Category {
+struct voCategory: Hashable {
     let name: String
-    var foodItems: [FoodItem]
-
-    init(name: String) {
-        self.name = name
-        self.foodItems = []
-    }
+    var aisle: voAisle
 }
 
 class CategoryView: Codable, Identifiable {
@@ -15,21 +10,15 @@ class CategoryView: Codable, Identifiable {
     let name: String
     var foodItems: [FoodItemView]
 
-    init(name: String) {
+    init(_ name: String) {
         self.id = UUID()
         self.name = name
         self.foodItems = []
     }
 
-    init(name: String, foodItems: [FoodItemView]) {
+    init(_ name: String, with foodItems: [FoodItemView]) {
         self.id = UUID()
         self.name = name
         self.foodItems = foodItems
-    }
-
-    init(category: Category) {
-        self.id = UUID()
-        self.name = category.name
-        self.foodItems = category.foodItems.map(FoodItemView.init)
     }
 }

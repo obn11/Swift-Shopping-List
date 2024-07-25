@@ -1,13 +1,5 @@
 import Foundation
 
-struct Supermarket {
-    var aisles: [Aisle]
-
-    init () {
-        self.aisles = []
-    }
-}
-
 class Trip: Codable, Identifiable {
     let id: UUID
     var aisles: [AisleView]
@@ -39,7 +31,7 @@ class Trip: Codable, Identifiable {
     private func LogUnsortedFood() {
         print("Unsorted")
         for food in self.unsorted {
-            print("[] " + food.name + " x" + String(food.quantity))
+            print("[] \(food.name)")
         }
     }
 }

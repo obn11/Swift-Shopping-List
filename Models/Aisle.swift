@@ -1,15 +1,8 @@
 import Foundation
 
-class Aisle {
+struct voAisle: Hashable {
     let number: Int
     let name: String
-    var categories: [Category]
-
-    init(number: Int, name: String) {
-        self.number = number
-        self.name = name
-        self.categories = []
-    }
 }
 
 class AisleView: Codable, Identifiable {
@@ -18,24 +11,25 @@ class AisleView: Codable, Identifiable {
     let name: String
     var categories: [CategoryView]
 
-    init(number: Int, name: String) {
+    init(_ number: Int, _ name: String) {
         self.id = UUID()
         self.number = number
         self.name = name
         self.categories = []
     }
 
-    init(number: Int, name: String, categories: [CategoryView]) {
+    init(_ aisle: voAisle) {
+        self.id = UUID()
+        self.number = aisle.number
+        self.name = aisle.name
+        self.categories = []
+    }
+
+
+    init(_ number: Int, _ name: String, with categories: [CategoryView]) {
         self.id = UUID()
         self.number = number
         self.name = name
         self.categories = categories
-    }
-
-    init(aisle: Aisle) {
-        self.id = UUID()
-        self.number = aisle.number
-        self.name = aisle.name
-        self.categories = aisle.categories.map(CategoryView.init)
     }
 }

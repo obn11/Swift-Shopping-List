@@ -2,24 +2,27 @@ import Foundation
 
 // This will be represented as a proper db eventually
 class db {
-    var supermarket: Supermarket
+    var foodDictionary: [String: voFoodItem]
+    var categoryDictionary: [String: voCategory]
+    var aisleDictionary: [String: voAisle]
 
-    // Seed Data
     init() {
-        self.supermarket = Supermarket()
+        self.foodDictionary = [:]
+        self.categoryDictionary = [:]
+        self.aisleDictionary = [:]
     }
-
+    
     func seed() {
 
         // Ailes
-        self.supermarket.aisles.append(Aisle(number: 1, name: "Fresh Produce & Deli"))
-        self.supermarket.aisles.append(Aisle(number: 2, name: "Dairy & Refrigerated"))
-        self.supermarket.aisles.append(Aisle(number: 3, name: "Frozen Foods"))
-        self.supermarket.aisles.append(Aisle(number: 4, name: "Pantry Staples"))
-        self.supermarket.aisles.append(Aisle(number: 5, name: "Snacks & Beverages"))
-        self.supermarket.aisles.append(Aisle(number: 6, name: "Alcohol"))
-        self.supermarket.aisles.append(Aisle(number: 7, name: "Household & Personal Care"))
-        self.supermarket.aisles.append(Aisle(number: 8, name: "Miscellaneous"))
+        addAisle(1, "Fresh Produce & Deli")
+        addAisle(2, "Dairy & Refrigerated")
+        addAisle(3, "Frozen Foods")
+        addAisle(4, "Pantry Staples")
+        addAisle(5, "Snacks & Beverages")
+        addAisle(6, "Alcohol")
+        addAisle(7, "Household & Personal Care")
+        addAisle(8, "Miscellaneous")
 
         // Categories
         addCategoryToAisle("Fresh Produce & Deli", "Fruit & Vegetables")
@@ -164,41 +167,28 @@ class db {
         addFoodToCategory("Canned & Prepared Foods", "Canned Tuna")
         addFoodToCategory("Canned & Prepared Foods", "Canned Corn")
     }
+    
+    func addAisle (_ number: Int, _ name: String) {
+        self.aisleDictionary[name] = voAisle(number: number, name: name)
+     }
         
-     
-        
-    // Function to add a category to a specific aisle
     func addCategoryToAisle(_ aisleName: String, _ categoryName: String) {
-        if let aisle = supermarket.aisles.first(where: { $0.name == aisleName }) {
-            let category = Category(name: categoryName)
-            aisle.categories.append(category)
-            return
-        }
-        print("Aisle not found: \(aisleName)")
+        categoryDictionary[categoryName] = voCategory(name: categoryName, aisle: self.aisleDictionary[aisleName]!)
     }
 
     func addFoodToCategory(_ categoryName: String, _ foodName: String) {
-        for aisle in supermarket.aisles {
-            if let i = aisle.categories.firstIndex(where: { $0.name == categoryName }) {
-                let food = FoodItem(name: foodName)
-                aisle.categories[i].foodItems.append(food)
-                return
-            }
-        }
-        print("Category not found: \(categoryName)")
+        let normalizedFood = Utils.normalize(foodName)
+        foodDictionary[normalizedFood] = voFoodItem(name: foodName, category: categoryName)
     }
 
     // To print the result and verify
     func log() {
-        for aisle in self.supermarket.aisles {
-            print("Aisle \(aisle.number): \(aisle.name)")
-            for category in aisle.categories {
-                print("  - \(category.name)")
-                for food in category.foodItems {
-                    print("    - \(food.name)")
-                }
-            }
-            print()
+        for (_, foodItem) in foodDictionary {
+            print("Food: \(foodItem.name) => Category: \(foodItem.category)")
+        }
+        print()
+        for (_, category) in categoryDictionary {
+            print("Category: \(category.name) => Aisle: \(category.aisle.name)")
         }
     }
 }

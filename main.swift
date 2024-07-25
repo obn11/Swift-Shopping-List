@@ -3,8 +3,9 @@ import Foundation
 func Run () {
   let db = db()
   db.seed()
-  db.log()
-  let manager = ShoppingListManager(supermarketDictionary: db.supermarket)
+  //db.log()
+  //print(db.foodDictionary[Utils.normalize("Banana")]!.name)
+  let manager = ShoppingListManager(with: db)
   manager.input = GetInput(inputType: "CMD")
   manager.ProcessInput()
   manager.MapFoodToCategory()

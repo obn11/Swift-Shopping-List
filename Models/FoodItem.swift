@@ -1,11 +1,8 @@
 import Foundation
 
-struct FoodItem {
+struct voFoodItem: Hashable {
     let name: String
-
-    init(name: String) {
-        self.name = name
-    }
+    let category: String
 }
 
 class FoodItemView: Codable, Identifiable {
@@ -13,21 +10,9 @@ class FoodItemView: Codable, Identifiable {
     let name: String
     let quantity: Int
 
-    init(name: String, quantity: Int?) {
+    init(_ name: String, quantity: Int?) {
         self.id = UUID()
         self.name = name
         self.quantity = quantity ?? 1
-    }
-
-    init(foodItem: FoodItem) {
-        self.id = UUID()
-        self.name = foodItem.name
-        self.quantity =  1
-    }
-
-    init(foodItem: FoodItem, quantity: Int) {
-        self.id = UUID()
-        self.name = foodItem.name
-        self.quantity = quantity
     }
 }
