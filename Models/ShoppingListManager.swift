@@ -24,11 +24,27 @@ class ShoppingListManager {
     }
   }
 
+  func match(_ food: String) -> voFoodItem? {
+    if let foodItem = db.foodDictionary[Utils.normalize(food)] {
+      return foodItem
+    }
+
+    // Check for partial match
+    //print("ban".contains("banana") || "banana".contains("ban"))
+    for (key, foodItem) in db.foodDictionary {
+      if key.contains(food) || food.contains(key) {
+        return foodItem
+      }
+    }
+    // TOOD fuzzy Levenshtein distance
+    return nil
+  }
+
   func MapFoodToCategory() {
     for food in foodRequest {
       // TODO normalize etc 
-      if let foody = db.foodDictionary[Utils.normalize(food.name)]  {
-        if let category = db.categoryDictionary[foody.category] {
+      if let foodLookup = match(food.name)  {
+        if let category = db.categoryDictionary[foodLookup.category] {
           ForceAddToTrip(aisle: category.aisle, category: category, foodItem: food)
           continue
         }
