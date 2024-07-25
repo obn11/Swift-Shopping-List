@@ -6,9 +6,8 @@ func Run () {
   //db.log()
   //print(db.foodDictionary[Utils.normalize("Banana")]!.name)
   let manager = ShoppingListManager(with: db)
-  manager.input = GetInput(inputType: "CMD")
-  manager.ProcessInput()
-  manager.MapFoodToCategory()
+  manager.request = GetInput(inputType: "CMD")
+  manager.ProcessRequest()
   manager.currentTrip.log()
 }
 

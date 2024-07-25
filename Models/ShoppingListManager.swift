@@ -1,26 +1,29 @@
 import Foundation
 
 class ShoppingListManager {
-  var input: [String]
-  var foodRequest: [FoodItemView]
+  var request: [String]
   var db: db
   var currentTrip: Trip
 
   init (with db: db) {
-    self.input = []
-    self.foodRequest = []
+    self.request = []
     self.currentTrip = Trip()
     self.db = db
   }
 
   // Porbable refactor
   // Pre processing to seporate food and quantity
-  func ProcessInput() {
-    for food in input {
-      let temp: [String] = food.components(separatedBy: " x")
-      let quanity = temp.count > 1 ? Int(temp[1]) : 1 
-      let foodItem = FoodItemView(temp[0], quantity: quanity)
-     foodRequest.append(foodItem)
+  func ProcessRequest() {
+    for food in request {
+      // TODO normalize etc 
+      if let foodLookup = match(food)  {
+        if let category = db.categoryDictionary[foodLookup.category] {
+          ForceAddToTrip(aisle: category.aisle, category: category, foodItem: FoodItemView(food))
+          continue
+        }
+      }
+      let foody = FoodItemView(food)
+      currentTrip.unsorted.append(foody)
     }
   }
 
@@ -30,7 +33,6 @@ class ShoppingListManager {
     }
 
     // Check for partial match
-    //print("ban".contains("banana") || "banana".contains("ban"))
     for (key, foodItem) in db.foodDictionary {
       if key.contains(food) || food.contains(key) {
         return foodItem
@@ -38,20 +40,6 @@ class ShoppingListManager {
     }
     // TOOD fuzzy Levenshtein distance
     return nil
-  }
-
-  func MapFoodToCategory() {
-    for food in foodRequest {
-      // TODO normalize etc 
-      if let foodLookup = match(food.name)  {
-        if let category = db.categoryDictionary[foodLookup.category] {
-          ForceAddToTrip(aisle: category.aisle, category: category, foodItem: food)
-          continue
-        }
-      }
-      let foody = FoodItemView(food.name, quantity: 1)
-      currentTrip.unsorted.append(foody)
-    }
   }
 
   // Helpers
@@ -70,13 +58,5 @@ class ShoppingListManager {
       return 
     }
     categoryView.foodItems.append(foodItem)
-  }
-  
-  // For Debug
-  private func LogFoodList() {
-    for food in foodRequest {
-      print(food.name)
-      print(food.quantity)
-    }
   }
 }
