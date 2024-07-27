@@ -7,11 +7,23 @@ func Run () {
   let manager = ShoppingListManager(with: db)
   manager.request = GetInput(inputType: "FILE")
   manager.ProcessRequest()
-  manager.ProcessUnsorted()
+  
+  // Use a semaphore to wait for the async operation to complete
+  let semaphore = DispatchSemaphore(value: 0)
+
+  Task {
+    await manager.ProcessUnsorted()
+    semaphore.signal()
+  }
+
+  // Wait for the async task to complete
+  semaphore.wait()
+
   manager.currentTrip.Log()
 }
 
 Run()
+
 print("Program completed")
 
 // Helpers 

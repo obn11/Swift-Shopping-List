@@ -18,16 +18,29 @@ class ShoppingListManager {
           ForceAddToTrip(aisle: category.aisle, category: category, foodItem: FoodItemView(food))
           continue
         }
+        print("Category error, \(foodLookup.category) not found with \(foodLookup) and \(food)")
       }
       currentTrip.unsorted.append(food)
     }
   }
 
-  func ProcessUnsorted() {
-    do {
-      try iAiCaller.categorizeFoods(uncategorizedFoods: currentTrip.unsorted, categories: db.categoryDictionary.values.map { $0.name })
-    } catch {
-      print("Error: \(error)")
+  func ProcessUnsorted() async {
+    print("Starting Process")
+
+    let unsortedFoods = currentTrip.unsorted.map { Utils.normalize($0) }
+    let categories =  db.categoryDictionary.values.map { $0.name }
+
+    let result = iAiCaller.categorizeFoods(
+      uncategorizedFoods: unsortedFoods,
+      categories: categories
+    )
+
+    for food in result {
+      if let category = db.categoryDictionary[food.category] {
+        let foodName = "- [x] \(food.name) |AI|"
+        ForceAddToTrip(aisle: category.aisle, category: category, foodItem: FoodItemView(foodName, note: food.note))
+        continue
+      }
     }
   }
 
@@ -67,7 +80,7 @@ class ShoppingListManager {
       if key.contains(food) || food.contains(key) {
         // print (food + " matches to category: " + category.name)
         // Goofy but we just need any food item in the category
-        return voFoodItem(name: "", category: category.name)
+        return voFoodItem("", category.name)
       }
     }
 

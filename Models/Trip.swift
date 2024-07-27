@@ -20,13 +20,11 @@ class Trip: Codable, Identifiable {
             for category in aisle.categories {
                 print("  > \(category.name)")
                 for food in category.foodItems {
-                    print("    \(food.name)")
+                    print("    \(food.name) \(food.note ?? "")")
                 }
             }
             print()
         }
-
-        LogUnsortedFood()
     }
 
     private func LogUnsortedFood() {

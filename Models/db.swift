@@ -179,10 +179,7 @@ class db {
 
     func addFoodToCategory(_ categoryName: String, _ foodName: String) {
         let normalizedFood = Utils.normalize(foodName)
-        foodDictionary[normalizedFood] = voFoodItem(name: foodName, category: categoryName)
-        if (normalizedFood == "potato") {
-            print(normalizedFood.contains("potatos") || "potatos".contains(normalizedFood))
-        }
+        foodDictionary[normalizedFood] = voFoodItem(foodName, categoryName)
     }
 
     // To print the result and verify
