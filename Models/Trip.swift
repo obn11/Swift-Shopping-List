@@ -4,7 +4,7 @@ class Trip: Codable, Identifiable {
     let id: UUID
     var aisles: [AisleView]
     let date: Date
-    var unsorted: [FoodItemView]
+    var unsorted: [String]
 
     init () {
         self.id = UUID()
@@ -13,13 +13,14 @@ class Trip: Codable, Identifiable {
         self.unsorted = []
     }
 
-    func log() {
+    // Todo order by aisle number
+    func Log() {
         for aisle in self.aisles {
             print("Aisle \(aisle.number): \(aisle.name)")
             for category in aisle.categories {
                 print("  > \(category.name)")
                 for food in category.foodItems {
-                    print("    [] \(food.name)")
+                    print("    \(food.name)")
                 }
             }
             print()
@@ -31,7 +32,7 @@ class Trip: Codable, Identifiable {
     private func LogUnsortedFood() {
         print("Unsorted")
         for food in self.unsorted {
-            print("[] \(food.name)")
+            print(food.dropFirst(6))
         }
     }
 }

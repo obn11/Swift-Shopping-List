@@ -25,7 +25,6 @@ class AisleView: Codable, Identifiable {
         self.categories = []
     }
 
-
     init(_ number: Int, _ name: String, with categories: [CategoryView]) {
         self.id = UUID()
         self.number = number
