@@ -10,7 +10,7 @@ Every week
 - [x] Soap powder- (friend for clothes) 
 - [x] Garlic - whole 
 - [x] Chilli Beans x1
-- [x] Potatos
+- [x] Potato's
 - [x] Onions
 - [x] Pasta
 - [x] Mayo
@@ -21,8 +21,8 @@ Every week
 - [x] Yogurt
 - [x] Baked beans
 - [x] Black Beans x3
-- [ ] Def coffee
-- [ ] Coffee 
+- [x] Def coffee
+- [x] Coffee 
 - [ ] Butter
 - [ ] Rubbish bags 
 - [x] Meat 

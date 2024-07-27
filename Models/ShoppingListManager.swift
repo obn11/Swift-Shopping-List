@@ -45,12 +45,12 @@ class ShoppingListManager {
   // Word Embeddings: Word2Vec for semantic relationships.
   private func match(_ food: String) -> voFoodItem? {
     var food = food
-    if food.starts(with: "- [x]") {
+    if food.starts(with: "- [x] ") {
       food = String(food.dropFirst(6))
     }
     
     if let foodItem = db.foodDictionary[Utils.normalize(food)] {
-      print (food + " matches to " + foodItem.name)
+      // print (food + " matches to " + foodItem.name)
       return foodItem
     }
 
@@ -65,7 +65,7 @@ class ShoppingListManager {
     // Match category 
     for (key, category) in db.categoryDictionary {
       if key.contains(food) || food.contains(key) {
-        print (food + " matches to category: " + category.name)
+        // print (food + " matches to category: " + category.name)
         // Goofy but we just need any food item in the category
         return voFoodItem(name: "", category: category.name)
       }
@@ -81,7 +81,7 @@ class ShoppingListManager {
       currentTrip.aisles.append(aisleView)
       return
     }
-    guard let categoryView = aisleView.categories.first(where: { $0.name == category.name }) else     {
+    guard let categoryView = aisleView.categories.first(where: { $0.name == category.name }) else {
       let categoryView = CategoryView(category.name, with: [foodItem])
       aisleView.categories.append(categoryView)
       return 
