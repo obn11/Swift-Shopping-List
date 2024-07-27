@@ -24,18 +24,22 @@ class ShoppingListManager {
     }
   }
 
-  func ProcessUnsorted() async {
-    print("Starting Process")
-
+  func ProcessUnsorted() {
     let unsortedFoods = currentTrip.unsorted.map { Utils.normalize($0) }
-    let categories =  db.categoryDictionary.values.map { $0.name }
+    let categories = db.categoryDictionary.values.map { $0.name }
 
-    let result = iAiCaller.categorizeFoods(
+    iAiCaller.categorizeFoods(
       uncategorizedFoods: unsortedFoods,
-      categories: categories
+      categories: categories,
+      completion: { result in
+        self.addResponseToTrip(response: result)
+        FileHandler.outputFile(at: "exampleOutput.txt", with: self.currentTrip.ToString()) 
+      }
     )
+  }
 
-    for food in result {
+  func addResponseToTrip(response: [voFoodItem]) {
+    for food in response {
       if let category = db.categoryDictionary[food.category] {
         let foodName = "- [x] \(food.name) |AI|"
         ForceAddToTrip(aisle: category.aisle, category: category, foodItem: FoodItemView(foodName, note: food.note))
@@ -63,14 +67,12 @@ class ShoppingListManager {
     }
     
     if let foodItem = db.foodDictionary[Utils.normalize(food)] {
-      // print (food + " matches to " + foodItem.name)
       return foodItem
     }
 
     // Check for partial match
     for (key, foodItem) in db.foodDictionary {
       if key.contains(food) || food.contains(key) {
-        print (food + " matches to " + foodItem.name)
         return foodItem
       }
     }
@@ -78,7 +80,6 @@ class ShoppingListManager {
     // Match category 
     for (key, category) in db.categoryDictionary {
       if key.contains(food) || food.contains(key) {
-        // print (food + " matches to category: " + category.name)
         // Goofy but we just need any food item in the category
         return voFoodItem("", category.name)
       }

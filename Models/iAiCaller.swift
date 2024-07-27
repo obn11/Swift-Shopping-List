@@ -5,15 +5,18 @@ class iAiCaller {
   static let shared = iAiCaller()
 
   private init() {}
-  
-  public static func categorizeFoods(uncategorizedFoods: [String], categories: [String]) -> [voFoodItem] {
-    return shared.makeRequest(uncategorizedFoods: uncategorizedFoods, categories: categories)
+
+  public static func categorizeFoods(uncategorizedFoods: [String], categories: [String], completion: @escaping ([voFoodItem]) -> Void) {
+    Task {
+      let result = await shared.makeRequest(uncategorizedFoods: uncategorizedFoods, categories: categories)
+      completion(result)
+      exit(0)
+    }
+    RunLoop.current.run()
   }
   
-  func makeRequest(uncategorizedFoods foodList: [String], categories categoryList: [String]) -> [voFoodItem] {
+  func makeRequest(uncategorizedFoods foodList: [String], categories categoryList: [String]) async -> [voFoodItem] {
     let client: AiClientProtocol = MockAiClient()
-
-    print("Making Request...")
 
     let request = Request(
         model: "gpt-4o-mini",
@@ -29,8 +32,10 @@ class iAiCaller {
     )
 
     do {
-        let response = try client.sendRequest(request)
-        return handleAPIResponse(response)
+      print("Making Request...")
+      let response = try await client.sendRequest(request)
+      print("Request Completed")
+      return handleAPIResponse(response)
     } catch {
         print("Error: \(error)")
         return []

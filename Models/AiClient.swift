@@ -2,14 +2,14 @@ import Foundation
 
 // Protocol for the OpenAI client
 protocol AiClientProtocol {
-	 func sendRequest(_ request: Request) throws -> Response
+	 func sendRequest(_ request: Request) async throws -> Response
 }
 
 // Mock implementation of the OpenAI client
 class MockAiClient: AiClientProtocol {
-	func sendRequest(_ request: Request) throws -> Response {
+	func sendRequest(_ request: Request) async throws -> Response {
 		// Simulating network delay
-		//try await Task.sleep(nanoseconds: 1_000_000_000) // 1 second delay
+		try await Task.sleep(nanoseconds: 1_000_000_000) // 1 second delay
 		
 		let mockResponseContent = """
 		{
@@ -122,25 +122,6 @@ class MockAiClient: AiClientProtocol {
 		])
 	}
 }
-
-// Structures to represent the request and response
-// struct Request: Codable {
-// 	 let model: String
-// 	 let messages: [ChatMessage]
-// 	 let temperature: Double
-// 	 let maxTokens: Int
-// 	 let topP: Double
-// 	 let frequencyPenalty: Double
-// 	 let presencePenalty: Double
-
-// 	 enum CodingKeys: String, CodingKey {
-// 		  case model, messages, temperature
-// 		  case maxTokens = "max_tokens"
-// 		  case topP = "top_p"
-// 		  case frequencyPenalty = "frequency_penalty"
-// 		  case presencePenalty = "presence_penalty"
-// 	 }
-// }
 
 struct Response: Codable {
 	 let choices: [Choice]

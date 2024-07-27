@@ -15,22 +15,22 @@ class Trip: Codable, Identifiable {
 
     // Todo order by aisle number
     func Log() {
-        for aisle in self.aisles {
-            print("Aisle \(aisle.number): \(aisle.name)")
-            for category in aisle.categories {
-                print("  > \(category.name)")
-                for food in category.foodItems {
-                    print("    \(food.name) \(food.note ?? "")")
-                }
-            }
-            print()
-        }
+        print(self.ToString())
     }
 
-    private func LogUnsortedFood() {
-        print("Unsorted")
-        for food in self.unsorted {
-            print(food.dropFirst(6))
+    func ToString() -> String {
+        var output: [String] = []
+        for aisle in self.aisles {
+            output.append("Aisle \(aisle.number): \(aisle.name)")
+            for category in aisle.categories {
+                output.append("  > \(category.name)")
+                for food in category.foodItems {
+                    output.append("    \(food.name) \(food.note ?? "")")
+                }
+            }
+            output.append("")
         }
+        
+        return output.joined(separator:"\n")
     }
 }

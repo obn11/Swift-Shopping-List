@@ -1,6 +1,6 @@
 import Foundation
 
-public class FileReader {
+public class FileHandler {
     public static func processFile(at path: String) -> [String] {
         guard let content = try? String(contentsOfFile: path, encoding: .utf8) else {
             print("Error: Unable to read file at \(path)")
@@ -20,14 +20,18 @@ public class FileReader {
 
             processedItems.append(trimmedLine)
         }
-
         return processedItems
     }
 
-    public static func printProcessedItems(_ items: [String]) {
-        print("Processed items:")
-        for (index, item) in items.enumerated() {
-            print("\(index + 1). \(item)")
+    public static func outputFile(at path: String, with content: String) {
+        //let fileManager = FileManager.default
+
+        do {
+            // Create the file if it doesn't exist, or overwrite it if it does
+            try content.write(to: URL(fileURLWithPath: path), atomically: true, encoding: .utf8)
+            print("File successfully written to \(path)")
+        } catch {
+            print("Error writing file: \(error.localizedDescription)")
         }
     }
 }
