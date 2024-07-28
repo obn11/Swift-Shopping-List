@@ -2,7 +2,7 @@ entrypoint = "main.swift"
 
 modules = ["swift"]
 
-compile = "swiftc main.swift ./Models/*.swift"
+compile = "swiftc main.swift ./Entities/*.swift ./Handlers/*.swift ./Managers/*.swift ./Protocols/*.swift ./Services/*.swift"
 run = "./main"
 
 [nix]
