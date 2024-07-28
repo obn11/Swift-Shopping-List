@@ -8,7 +8,6 @@ func Run () {
   manager.request = GetInput(inputType: "FILE")
   manager.ProcessRequest()
   manager.ProcessUnsorted()
-  manager.currentTrip.Log()
 }
 
 Run()
@@ -21,7 +20,7 @@ func GetInput (inputType: String = "CMD") -> [String] {
   if (inputType == "CMD") {
     return cli.Input()
   } else if (inputType == "FILE") {
-    let lines = FileHandler.processFile(at: "exampleFile.txt")
+    let lines = FileHandler.processFile(at: "exampleInput.txt")
     return lines
   } else {
     print("Enter the input")

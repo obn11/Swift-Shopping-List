@@ -13,14 +13,13 @@ class Trip: Codable, Identifiable {
         self.unsorted = []
     }
 
-    // Todo order by aisle number
     func Log() {
         print(self.ToString())
     }
 
     func ToString() -> String {
         var output: [String] = []
-        for aisle in self.aisles {
+        for aisle in self.aisles.sorted { $0.number < $1.number } {
             output.append("Aisle \(aisle.number): \(aisle.name)")
             for category in aisle.categories {
                 output.append("  > \(category.name)")

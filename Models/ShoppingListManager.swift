@@ -13,12 +13,12 @@ class ShoppingListManager {
 
   func ProcessRequest() {
     for food in request {
-      if let foodLookup = match(food)  {
-        if let category = db.categoryDictionary[foodLookup.category] {
-          ForceAddToTrip(aisle: category.aisle, category: category, foodItem: FoodItemView(food))
+      if let categoryLookup = matchToCategory(food) {
+        if let category = db.categoryDictionary[categoryLookup] {
+          ForceAppendToTrip(aisle: category.aisle, category: category, foodItem: FoodItemView(food))
           continue
         }
-        print("Category error, \(foodLookup.category) not found with \(foodLookup) and \(food)")
+        print("Category error, \(categoryLookup) not found with \(food)")
       }
       currentTrip.unsorted.append(food)
     }
@@ -38,16 +38,6 @@ class ShoppingListManager {
     )
   }
 
-  func addResponseToTrip(response: [voFoodItem]) {
-    for food in response {
-      if let category = db.categoryDictionary[food.category] {
-        let foodName = "- [x] \(food.name) |AI|"
-        ForceAddToTrip(aisle: category.aisle, category: category, foodItem: FoodItemView(foodName, note: food.note))
-        continue
-      }
-    }
-  }
-
   // Helpers
 
   // PROJECT NOTE: Several processing functions are not used in the final version of the app. 
@@ -60,20 +50,18 @@ class ShoppingListManager {
   // Extras for experts
   // TF-IDF (Term Frequency-Inverse Document Frequency): Weight by importance in the context. <= Maybe not useful here?
   // Word Embeddings: Word2Vec for semantic relationships.
-  private func match(_ food: String) -> voFoodItem? {
-    var food = food
-    if food.starts(with: "- [x] ") {
-      food = String(food.dropFirst(6))
-    }
-    
+
+  // potentially return category only
+  private func matchToCategory(_ food: String) -> String? {
+    // Exact match
     if let foodItem = db.foodDictionary[Utils.normalize(food)] {
-      return foodItem
+      return foodItem.category
     }
 
-    // Check for partial match
+    // Partial match
     for (key, foodItem) in db.foodDictionary {
       if key.contains(food) || food.contains(key) {
-        return foodItem
+        return foodItem.category
       }
     }
 
@@ -81,14 +69,14 @@ class ShoppingListManager {
     for (key, category) in db.categoryDictionary {
       if key.contains(food) || food.contains(key) {
         // Goofy but we just need any food item in the category
-        return voFoodItem("", category.name)
+        return category.name
       }
     }
 
     return nil
   }
 
-  private func ForceAddToTrip(aisle: voAisle, category: voCategory, foodItem: FoodItemView) {
+  private func ForceAppendToTrip(aisle: voAisle, category: voCategory, foodItem: FoodItemView) {
     guard let aisleView = currentTrip.aisles.first(where: { $0.name == aisle.name }) else {
       let categoryView = CategoryView(category.name, with: [foodItem])
       let aisleView = AisleView(aisle.number, aisle.name, with: [categoryView])
@@ -101,5 +89,15 @@ class ShoppingListManager {
       return 
     }
     categoryView.foodItems.append(foodItem)
+  }
+
+  private func addResponseToTrip(response: [voFoodItem]) {
+    for food in response {
+      if let category = db.categoryDictionary[food.category] {
+        let foodName = "- [x] \(food.name.capitalized) |AI|"
+        ForceAppendToTrip(aisle: category.aisle, category: category, foodItem: FoodItemView(foodName, note: food.note))
+        continue
+      }
+    }
   }
 }

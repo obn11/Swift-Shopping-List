@@ -1,65 +1,60 @@
-Aisle 4: Pantry Staples
-  > Spices & Seasonings
-    - [x] Salt and pepper 
-    - [x] garlic whole |AI| 
-  > Pasta, Rice & Noodles
-    - [x] Pasta 
-    - [x] Spaghetti 
-    - [x] Rice 
-  > Canned & Prepared Foods
-    - [x] Baked beans 
-    - [x] chilli beans x1 |AI| 
-    - [x] black beans x3 |AI| 
-  > Sauces, Stock & Marinades
-    - [x] mayo |AI| 
-    - [x] tomato paste |AI| 
-    - [x] oil |AI| 
-  > Breakfast Cereals
-    - [x] weetbix |AI| 
-  > Baking Supplies & Sugar
-    - [x] brown sugar |AI| 
-    - [x] caster sugar |AI| 
-
 Aisle 1: Fresh Produce & Deli
   > Fruit & Vegetables
     - [x] Broccoli 
     - [x] Potato's 
     - [x] Tin pineapple 
-    - [x] Fruit 
     - [x] Carrot 
-    - [x] onion |AI| 
-    - [x] onion |AI| 
-    - [x] celery |AI| 
-    - [x] potatos l |AI| 
-    - [x] mushroom |AI| 
-  > Deli, Salads & Cooked Meats
-    - [x] Meat 
+    - [x] Onion |AI| 
+    - [x] Onion |AI| 
+    - [x] Celery |AI| 
+    - [x] Potatos L |AI| 
+    - [x] Mushroom |AI| 
   > Bakery
-    - [x] wrap |AI| 
+    - [x] Wrap |AI| 
   > Seafood
-    - [x] salmon fortnightly |AI| 
-    - [x] tuna x6 |AI| 
+    - [x] Salmon Fortnightly |AI| 
+    - [x] Tuna X6 |AI| 
   > Butchery
-    - [x] chicken thigh |AI| 
+    - [x] Chicken Thigh |AI| 
+
+Aisle 2: Dairy & Refrigerated
+  > Dairy & Eggs
+    - [x] Yogurt |AI| 
+    - [x] 800 Ml Of Cream |AI| 
+
+Aisle 3: Frozen Foods
+  > Frozen Foods
+    - [x] Frozen peas 
+    - [x] Frozen Raspberrie |AI| 
+
+Aisle 4: Pantry Staples
+  > Spices & Seasonings
+    - [x] Salt and pepper 
+    - [x] Garlic Whole |AI| 
+  > Pasta, Rice & Noodles
+    - [x] Spaghetti 
+  > Canned & Prepared Foods
+    - [x] Baked beans 
+    - [x] Chilli Beans X1 |AI| 
+    - [x] Black Beans X3 |AI| 
+  > Sauces, Stock & Marinades
+    - [x] Mayo |AI| 
+    - [x] Tomato Paste |AI| 
+    - [x] Oil |AI| 
+  > Breakfast Cereals
+    - [x] Weetbix |AI| 
+  > Baking Supplies & Sugar
+    - [x] Brown Sugar |AI| 
+    - [x] Caster Sugar |AI| 
 
 Aisle 5: Snacks & Beverages
   > Hot Drinks
     - [x] Def coffee 
     - [x] Coffee 
 
-Aisle 3: Frozen Foods
-  > Frozen Foods
-    - [x] Frozen peas 
-    - [x] frozen raspberrie |AI| 
-
 Aisle 7: Household & Personal Care
   > Cleaning Products
-    - [x] soap powder friend for clothe |AI| This item is clothing detergent.
+    - [x] Soap Powder Friend For Clothe |AI| This item is clothing detergent.
   > Household
-    - [x] vacuum cleaner bags request from jen |AI| This item is a household supply.
-    - [x] tin foil |AI| This item is a kitchen supply.
-
-Aisle 2: Dairy & Refrigerated
-  > Dairy & Eggs
-    - [x] yogurt |AI| 
-    - [x] 800 ml of cream |AI| 
+    - [x] Vacuum Cleaner Bags Request From Jen |AI| This item is a household supply.
+    - [x] Tin Foil |AI| This item is a kitchen supply.

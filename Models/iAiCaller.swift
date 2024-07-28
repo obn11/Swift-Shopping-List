@@ -14,8 +14,10 @@ class iAiCaller {
     }
     RunLoop.current.run()
   }
+
+  // Helpers
   
-  func makeRequest(uncategorizedFoods foodList: [String], categories categoryList: [String]) async -> [voFoodItem] {
+  private func makeRequest(uncategorizedFoods foodList: [String], categories categoryList: [String]) async -> [voFoodItem] {
     let client: AiClientProtocol = MockAiClient()
 
     let request = Request(
@@ -42,7 +44,7 @@ class iAiCaller {
     }
   }
 
-  func handleAPIResponse(_ response: Response) -> [voFoodItem] {
+  private func handleAPIResponse(_ response: Response) -> [voFoodItem] {
     guard let jsonString = response.choices.first?.message.content else {
       print("Error: No content in response")
       return []
@@ -129,7 +131,7 @@ class iAiCaller {
     """
   }
 
-  func getUserPrompt(foodList: [String], categoryList: [String]) -> String {
+  private func getUserPrompt(foodList: [String], categoryList: [String]) -> String {
     return """
     #Input
     1. A list of food items that need categorization: 
@@ -148,9 +150,6 @@ struct CategorizedFoodsResponse: Codable {
         case categorizedFoods = "categorized_foods"
     }
 }
-
-// this will use the library OpenAISwift
-// For this example, I manually return the response (ran through playground)
 
 struct ChatMessage: Codable {
     let role: String
