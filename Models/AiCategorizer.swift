@@ -1,12 +1,11 @@
-//import OpenAISwift
 import Foundation
 
-class iAiCaller {
-  static let shared = iAiCaller()
+class AiCategorizer {
+  static let shared = AiCategorizer()
 
   private init() {}
 
-  public static func categorizeFoods(uncategorizedFoods: [String], categories: [String], completion: @escaping ([voFoodItem]) -> Void) {
+  public static func classifyUnmatchedItems(uncategorizedFoods: [String],categories: [String], completion: @escaping ([voFoodItem]) -> Void) {
     Task {
       let result = await shared.makeRequest(uncategorizedFoods: uncategorizedFoods, categories: categories)
       completion(result)

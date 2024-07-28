@@ -11,11 +11,11 @@ class AisleView: Codable, Identifiable {
     let name: String
     var categories: [CategoryView]
 
-    init(_ number: Int, _ name: String) {
+    init(_ number: Int, _ name: String, with categories: [CategoryView]?) {
         self.id = UUID()
         self.number = number
         self.name = name
-        self.categories = []
+        self.categories = categories ?? []
     }
 
     init(_ aisle: voAisle) {
@@ -23,12 +23,5 @@ class AisleView: Codable, Identifiable {
         self.number = aisle.number
         self.name = aisle.name
         self.categories = []
-    }
-
-    init(_ number: Int, _ name: String, with categories: [CategoryView]) {
-        self.id = UUID()
-        self.number = number
-        self.name = name
-        self.categories = categories
     }
 }

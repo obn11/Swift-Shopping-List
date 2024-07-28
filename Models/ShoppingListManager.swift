@@ -1,18 +1,18 @@
 import Foundation
 
 class ShoppingListManager {
-  var request: [String]
-  var db: db
+  private let db: Database
+  private let outputHandler: OutputHandler
   var currentTrip: Trip
 
-  init (with db: db) {
-    self.request = []
+  init (database: Database, outputHandler: OutputHandler) {
+    self.db = database
+    self.outputHandler = outputHandler
     self.currentTrip = Trip()
-    self.db = db
   }
 
-  func ProcessRequest() {
-    for food in request {
+  func processInput(_ input: [String]) {
+    for food in input {
       if let categoryLookup = matchToCategory(food) {
         if let category = db.categoryDictionary[categoryLookup] {
           ForceAppendToTrip(aisle: category.aisle, category: category, foodItem: FoodItemView(food))
@@ -24,16 +24,16 @@ class ShoppingListManager {
     }
   }
 
-  func ProcessUnsorted() {
+  func processUnsorted() {
     let unsortedFoods = currentTrip.unsorted.map { Utils.normalize($0) }
     let categories = db.categoryDictionary.values.map { $0.name }
-
-    iAiCaller.categorizeFoods(
+    AiCategorizer.classifyUnmatchedItems(
       uncategorizedFoods: unsortedFoods,
       categories: categories,
-      completion: { result in
-        self.addResponseToTrip(response: result)
-        FileHandler.outputFile(at: "exampleOutput.txt", with: self.currentTrip.ToString()) 
+      completion: { [weak self] response in
+        guard let self = self else { return }
+        self.addResponseToTrip(response: response)
+        self.outputHandler.output(self.currentTrip.ToString()) 
       }
     )
   }
@@ -51,7 +51,6 @@ class ShoppingListManager {
   // TF-IDF (Term Frequency-Inverse Document Frequency): Weight by importance in the context. <= Maybe not useful here?
   // Word Embeddings: Word2Vec for semantic relationships.
 
-  // potentially return category only
   private func matchToCategory(_ food: String) -> String? {
     // Exact match
     if let foodItem = db.foodDictionary[Utils.normalize(food)] {

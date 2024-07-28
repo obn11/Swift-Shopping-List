@@ -10,15 +10,9 @@ class CategoryView: Codable, Identifiable {
     let name: String
     var foodItems: [FoodItemView]
 
-    init(_ name: String) {
+    init(_ name: String, with foodItems: [FoodItemView]? = []) {
         self.id = UUID()
         self.name = name
-        self.foodItems = []
-    }
-
-    init(_ name: String, with foodItems: [FoodItemView]) {
-        self.id = UUID()
-        self.name = name
-        self.foodItems = foodItems
+        self.foodItems = foodItems ?? []
     }
 }

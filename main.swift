@@ -1,30 +1,32 @@
 import Foundation
 
-func Run () {
-  let db = db()
+func run(inputType: InputType) {
+  let db = Database()
   db.seed()
-  //db.log()
-  let manager = ShoppingListManager(with: db)
-  manager.request = GetInput(inputType: "FILE")
-  manager.ProcessRequest()
-  manager.ProcessUnsorted()
-}
 
-Run()
-
-print("Program completed")
-
-// Helpers 
-// TODO temp, make inputType enum
-func GetInput (inputType: String = "CMD") -> [String] {
-  if (inputType == "CMD") {
-    return cli.Input()
-  } else if (inputType == "FILE") {
-    let lines = FileHandler.processFile(at: "exampleInput.txt")
-    return lines
-  } else {
-    print("Enter the input")
-    return [""]  
+  let inputHandler: InputHandler
+  let outputHandler: OutputHandler
+  
+  switch inputType {
+    case .cli:
+      let cliHandler = CliHandler()
+      inputHandler = cliHandler
+      outputHandler = cliHandler
+    case .file(let inputPath, let outputPath):
+      let fileHandler = FileHandler(inputPath: inputPath, outputPath: outputPath)
+      inputHandler = fileHandler
+      outputHandler = fileHandler
   }
+
+  let manager = ShoppingListManager(database: db, outputHandler: outputHandler)
+  let input = inputHandler.getInput()
+  manager.processInput(input)
+  manager.processUnsorted()
 }
 
+run(inputType: .file(inputPath: "exampleInput.txt", outputPath: "exampleOutput.txt"))
+
+enum InputType {
+    case cli
+    case file(inputPath: String, outputPath: String)
+}

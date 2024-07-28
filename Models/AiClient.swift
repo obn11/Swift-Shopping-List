@@ -6,6 +6,8 @@ protocol AiClientProtocol {
 }
 
 // Mock implementation of the OpenAI client
+// PROJECT NOTE: Due to replt's package and api calling limitations 
+// I couldn't send a real request, so Mocked out like a test
 class MockAiClient: AiClientProtocol {
 	func sendRequest(_ request: Request) async throws -> Response {
 		// Simulating network delay

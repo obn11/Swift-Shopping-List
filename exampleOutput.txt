@@ -2,7 +2,7 @@ Aisle 1: Fresh Produce & Deli
   > Fruit & Vegetables
     - [x] Broccoli 
     - [x] Potato's 
-    - [x] Tin pineapple 
+    - [x] Tin pineapple  
     - [x] Carrot 
     - [x] Onion |AI| 
     - [x] Onion |AI| 
@@ -29,7 +29,7 @@ Aisle 3: Frozen Foods
 
 Aisle 4: Pantry Staples
   > Spices & Seasonings
-    - [x] Salt and pepper 
+    - [x] Salt and pepper  
     - [x] Garlic Whole |AI| 
   > Pasta, Rice & Noodles
     - [x] Spaghetti 
@@ -50,7 +50,7 @@ Aisle 4: Pantry Staples
 Aisle 5: Snacks & Beverages
   > Hot Drinks
     - [x] Def coffee 
-    - [x] Coffee 
+    - [x] Coffee  
 
 Aisle 7: Household & Personal Care
   > Cleaning Products

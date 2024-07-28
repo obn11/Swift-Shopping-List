@@ -1,7 +1,7 @@
 import Foundation
 
 // This will be represented as a proper db eventually
-class db {
+class Database {
     var foodDictionary: [String: voFoodItem]
     var categoryDictionary: [String: voCategory]
     var aisleDictionary: [String: voAisle]

@@ -19,7 +19,7 @@ class Trip: Codable, Identifiable {
 
     func ToString() -> String {
         var output: [String] = []
-        for aisle in self.aisles.sorted { $0.number < $1.number } {
+        for aisle in self.aisles.sorted(by: { $0.number < $1.number }) {
             output.append("Aisle \(aisle.number): \(aisle.name)")
             for category in aisle.categories {
                 output.append("  > \(category.name)")
