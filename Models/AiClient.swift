@@ -15,107 +15,99 @@ class MockAiClient: AiClientProtocol {
 		
 		let mockResponseContent = """
 		{
-			"categorized_foods": [
-				{
-				  "food_item": "wrap",
-				  "category": "Bakery"
-				},
-				{
-				  "food_item": "soap powder friend for clothe",
-				  "category": "Cleaning Products",
-				  "note": "This item is clothing detergent."
-				},
-				{
-				  "food_item": "garlic whole",
-				  "category": "Spices & Seasonings"
-				},
-				{
-				  "food_item": "chilli beans x1",
-				  "category": "Canned & Prepared Foods"
-				},
-				{
-				  "food_item": "onion",
-				  "category": "Fruit & Vegetables"
-				},
-				{
-				  "food_item": "mayo",
-				  "category": "Sauces, Stock & Marinades"
-				},
-				{
-				  "food_item": "salmon fortnightly",
-				  "category": "Seafood"
-				},
-				{
-				  "food_item": "weetbix",
-				  "category": "Breakfast Cereals"
-				},
-				{
-				  "food_item": "yogurt",
-				  "category": "Dairy & Eggs"
-				},
-				{
-				  "food_item": "black beans x3",
-				  "category": "Canned & Prepared Foods"
-				},
-				{
-				  "food_item": "chicken thigh",
-				  "category": "Butchery"
-				},
-				{
-				  "food_item": "tuna x6",
-				  "category": "Seafood"
-				},
-				{
-				  "food_item": "vacuum cleaner bags request from jen",
-				  "category": "Household",
-				  "note": "This item is a household supply."
-				},
-				{
-				  "food_item": "onion",
-				  "category": "Fruit & Vegetables"
-				},
-				{
-				  "food_item": "celery",
-				  "category": "Fruit & Vegetables"
-				},
-				{
-				  "food_item": "frozen raspberrie",
-				  "category": "Frozen Foods"
-				},
-				{
-				  "food_item": "800 ml of cream",
-				  "category": "Dairy & Eggs"
-				},
-				{
-				  "food_item": "brown sugar",
-				  "category": "Baking Supplies & Sugar"
-				},
-				{
-				  "food_item": "caster sugar",
-				  "category": "Baking Supplies & Sugar"
-				},
-				{
-				  "food_item": "tin foil",
-				  "category": "Household",
-				  "note": "This item is a kitchen supply."
-				},
-				{
-				  "food_item": "potatos l",
-				  "category": "Fruit & Vegetables"
-				},
-				{
-				  "food_item": "mushroom",
-				  "category": "Fruit & Vegetables"
-				},
-				{
-				  "food_item": "tomato paste",
-				  "category": "Sauces, Stock & Marinades"
-				},
-				{
-				  "food_item": "oil",
-				  "category": "Sauces, Stock & Marinades"
-				}
-			]
+		  "categorized_foods": [
+			 {
+				"food_item": "wrap",
+				"category": "Bread rolls and Wraps"
+			 },
+			 {
+				"food_item": "soap powder friend for clothe",
+				"category": "Cleaning",
+				"note": "This item is a clothing detergent."
+			 },
+			 {
+				"food_item": "garlic whole",
+				"category": "Herbs and Spices"
+			 },
+			 {
+				"food_item": "chilli beans x1",
+				"category": "Canned Foods"
+			 },
+			 {
+				"food_item": "potato",
+				"category": "Vegetables"
+			 },
+			 {
+				"food_item": "pasta",
+				"category": "Fresh soup and Pasta"
+			 },
+			 {
+				"food_item": "mayo",
+				"category": "Dressings"
+			 },
+			 {
+				"food_item": "salmon fortnightly",
+				"category": "Seafood"
+			 },
+			 {
+				"food_item": "weetbix",
+				"category": "Breakfast cereal"
+			 },
+			 {
+				"food_item": "black beans x3",
+				"category": "Canned Foods"
+			 },
+			 {
+				"food_item": "meat",
+				"category": "Meats"
+			 },
+			 {
+				"food_item": "chicken thigh",
+				"category": "Meats"
+			 },
+			 {
+				"food_item": "fruit",
+				"category": "Fruits"
+			 },
+			 {
+				"food_item": "tuna x6",
+				"category": "Seafood"
+			 },
+			 {
+				"food_item": "vacuum cleaner bags request from jen",
+				"category": "Cleaning",
+				"note": "This item is a household supply."
+			 },
+			 {
+				"food_item": "celery",
+				"category": "Vegetables"
+			 },
+			 {
+				"food_item": "frozen raspberrie",
+				"category": "Fruits"
+			 },
+			 {
+				"food_item": "800 ml of cream",
+				"category": "Butter"
+			 },
+			 {
+				"food_item": "tin foil",
+				"category": "Kitchen and Plasticware",
+				"note": "This item is typically used for food preparation."
+			 },
+			 {
+				"food_item": "potatos l",
+				"category": "Vegetables"
+			 },
+			 {
+				"food_item": "tomato paste",
+				"category": "Sauces"
+			 },
+			 {
+				"food_item": "oil",
+				"category": "Cooking oil"
+			 }
+		  ]
 		}
 		"""
 		

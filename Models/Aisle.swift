@@ -1,17 +1,17 @@
 import Foundation
 
 struct voAisle: Hashable {
-    let number: Int
+    let number: Double
     let name: String
 }
 
 class AisleView: Codable, Identifiable {
     var id: UUID
-    let number: Int
+    let number: Double
     let name: String
     var categories: [CategoryView]
 
-    init(_ number: Int, _ name: String, with categories: [CategoryView]?) {
+    init(_ number: Double, _ name: String, with categories: [CategoryView]?) {
         self.id = UUID()
         self.number = number
         self.name = name

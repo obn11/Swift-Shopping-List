@@ -1,60 +1,82 @@
-Aisle 1: Fresh Produce & Deli
-  > Fruit & Vegetables
+Fruits and Vegetables
+  > Vegetables
+    - [x] Salt and pepper  
     - [x] Broccoli 
-    - [x] Potato's 
-    - [x] Tin pineapple  
+    - [x] Onions 
+    - [x] Onion 
     - [x] Carrot 
-    - [x] Onion |AI| 
-    - [x] Onion |AI| 
+    - [x] Potato |AI| 
     - [x] Celery |AI| 
     - [x] Potatos L |AI| 
-    - [x] Mushroom |AI| 
-  > Bakery
-    - [x] Wrap |AI| 
+  > Fruits
+    - [x] Tin pineapple  
+    - [x] Fruit |AI| 
+    - [x] Frozen Raspberrie |AI| 
+
+Seafood
   > Seafood
     - [x] Salmon Fortnightly |AI| 
     - [x] Tuna X6 |AI| 
-  > Butchery
+
+Meats
+  > Meats
+    - [x] Meat |AI| 
     - [x] Chicken Thigh |AI| 
 
-Aisle 2: Dairy & Refrigerated
-  > Dairy & Eggs
-    - [x] Yogurt |AI| 
-    - [x] 800 Ml Of Cream |AI| 
+Aisle 1: Breakfast and Bread
+  > Bread rolls and Wraps
+    - [x] Wrap |AI| 
+  > Breakfast cereal
+    - [x] Weetbix |AI| 
 
-Aisle 3: Frozen Foods
-  > Frozen Foods
-    - [x] Frozen peas 
-    - [x] Frozen Raspberrie |AI| 
-
-Aisle 4: Pantry Staples
-  > Spices & Seasonings
-    - [x] Salt and pepper  
-    - [x] Garlic Whole |AI| 
-  > Pasta, Rice & Noodles
+Aisle 2: Pantry Staples
+  > Pasta and Rice
     - [x] Spaghetti 
-  > Canned & Prepared Foods
+  > Canned Foods
     - [x] Baked beans 
+    - [x] Frozen peas 
     - [x] Chilli Beans X1 |AI| 
     - [x] Black Beans X3 |AI| 
-  > Sauces, Stock & Marinades
+  > Soups
+    - [x] Mushrooms  
+  > Herbs and Spices
+    - [x] Garlic Whole |AI| 
+  > Dressings
     - [x] Mayo |AI| 
-    - [x] Tomato Paste |AI| 
-    - [x] Oil |AI| 
-  > Breakfast Cereals
-    - [x] Weetbix |AI| 
-  > Baking Supplies & Sugar
-    - [x] Brown Sugar |AI| 
-    - [x] Caster Sugar |AI| 
 
-Aisle 5: Snacks & Beverages
-  > Hot Drinks
+Aisle 3: Cooking Essentials
+  > Kitchen and Plasticware
+    - [x] Tin Foil |AI| This item is typically used for food preparation.
+  > Sauces
+    - [x] Tomato Paste |AI| 
+  > Cooking oil
+    - [x] Oil |AI| 
+
+Aisle 4: Snacks and Sweets
+  > Party needs
+    - [x] Rice 
+
+Aisle 5: Baking and Essentials
+  > Baking needs
+    - [x] Brown sugar 
+    - [x] Caster sugar  
+
+Aisle 6: Beverages and Household
+  > Tea and Coffee
     - [x] Def coffee 
     - [x] Coffee  
 
-Aisle 7: Household & Personal Care
-  > Cleaning Products
-    - [x] Soap Powder Friend For Clothe |AI| This item is clothing detergent.
-  > Household
+Aisle 8: Home and Pet
+  > Cleaning
+    - [x] Soap Powder Friend For Clothe |AI| This item is a clothing detergent.
     - [x] Vacuum Cleaner Bags Request From Jen |AI| This item is a household supply.
-    - [x] Tin Foil |AI| This item is a kitchen supply.
+
+Aisle 11: Specialty Foods and Beverages
+  > Cultured foods
+    - [x] Yogurt 
+
+Aisle 12: Packaged Meats and Dairy
+  > Fresh soup and Pasta
+    - [x] Pasta |AI| 
+  > Butter
+    - [x] 800 Ml Of Cream |AI| 

@@ -20,7 +20,10 @@ class Trip: Codable, Identifiable {
     func ToString() -> String {
         var output: [String] = []
         for aisle in self.aisles.sorted(by: { $0.number < $1.number }) {
-            output.append("Aisle \(aisle.number): \(aisle.name)")
+            let aisleString = (aisle.number > 0 && aisle.number.rounded() == aisle.number) ?
+                "Aisle \(String(Int(aisle.number))): \(aisle.name)" : 
+                "\(aisle.name)"
+            output.append(aisleString)
             for category in aisle.categories {
                 output.append("  > \(category.name)")
                 for food in category.foodItems {

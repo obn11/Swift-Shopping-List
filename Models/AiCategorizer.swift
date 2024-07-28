@@ -18,7 +18,6 @@ class AiCategorizer {
   
   private func makeRequest(uncategorizedFoods foodList: [String], categories categoryList: [String]) async -> [voFoodItem] {
     let client: AiClientProtocol = MockAiClient()
-
     let request = Request(
         model: "gpt-4o-mini",
         messages: [
