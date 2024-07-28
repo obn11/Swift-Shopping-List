@@ -12,15 +12,12 @@ class ShoppingListManager {
   }
 
   func processInput(_ input: [String]) {
-    for food in input {
-      if let categoryLookup = matchToCategory(food) {
-        if let category = db.categoryDictionary[categoryLookup] {
-          ForceAppendToTrip(aisle: category.aisle, category: category, foodItem: FoodItemView(food))
-          continue
-        }
-        print("Category error, \(categoryLookup) not found with \(food)")
+    input.forEach { food in
+      if let category = matchToCategory(food).flatMap({db.categoryDictionary[$0]}) {
+        ForceAppendToTrip(aisle: category.aisle, category: category, foodItem: FoodItemView(food))
+      } else {
+        currentTrip.unsorted.append(food)
       }
-      currentTrip.unsorted.append(food)
     }
   }
 
@@ -52,27 +49,17 @@ class ShoppingListManager {
   // Word Embeddings: Word2Vec for semantic relationships.
 
   private func matchToCategory(_ food: String) -> String? {
-    // Exact match
-    if let foodItem = db.foodDictionary[Utils.normalize(food)] {
-      return foodItem.category
-    }
+    let normalizedFood = Utils.normalize(food)
 
-    // Partial match
-    for (key, foodItem) in db.foodDictionary {
-      if key.contains(food) || food.contains(key) {
-        return foodItem.category
-      }
-    }
-
-    // Match category 
-    for (key, category) in db.categoryDictionary {
-      if key.contains(food) || food.contains(key) {
-        // Goofy but we just need any food item in the category
-        return category.name
-      }
-    }
-
-    return nil
+    return db.foodDictionary[normalizedFood]?.category
+      // Partial Match
+      ?? db.foodDictionary
+        .first(where: { $0.key.contains(food) || food.contains($0.key) })?
+        .value.category
+      // Category Partial Match
+      ?? db.categoryDictionary
+        .first(where: { $0.key.contains(food) || food.contains($0.key) })?
+        .value.name
   }
 
   private func ForceAppendToTrip(aisle: voAisle, category: voCategory, foodItem: FoodItemView) {
